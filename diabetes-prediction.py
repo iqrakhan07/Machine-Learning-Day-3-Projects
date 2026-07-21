@@ -6,22 +6,47 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-df=pd.read_csv("diabetes.csv")
+# Load dataset
+df = pd.read_csv("diabetes.csv")
 
-X=df.drop("Outcome",axis=1)
-y=df["Outcome"]
+# Features and Target
+X = df.drop("Outcome", axis=1)
+y = df["Outcome"]
 
-X_train,X_test,y_train,y_test=train_test_split(
-X,y,test_size=0.2,random_state=42)
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.20,
+    random_state=42
+)
 
-model=LogisticRegression(max_iter=1000)
+# Create model
+model = LogisticRegression(max_iter=1000)
 
-model.fit(X_train,y_train)
+# Train model
+model.fit(X_train, y_train)
 
-prediction=model.predict(X_test)
+# Test prediction
+prediction = model.predict(X_test)
 
-print("Accuracy:",accuracy_score(y_test,prediction))
+# Accuracy
+accuracy = accuracy_score(y_test, prediction)
+print(f"Model Accuracy: {accuracy:.2%}")
 
-patient=[[2,120,70,20,80,25.5,0.4,35]]
+# Predict a New Patient
 
-print(model.predict(patient))
+patient = pd.DataFrame(
+    [[2, 120, 70, 20, 80, 25.5, 0.4, 35]],
+    columns=X.columns
+)
+
+result = model.predict(patient)
+
+print("\nPatient Details")
+print(patient)
+
+if result[0] == 1:
+    print("\nPrediction: Diabetic")
+else:
+    print("\nPrediction: Not Diabetic")
