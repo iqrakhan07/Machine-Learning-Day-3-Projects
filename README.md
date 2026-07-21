@@ -21,6 +21,15 @@ Predict whether a patient has diabetes based on medical information.
 ### Algorithm
 - Logistic Regression
 
+ ### Workflow
+
+- Load the diabetes dataset
+- Split data into training and testing sets
+- Train a Logistic Regression model
+- Evaluate model accuracy
+- Predict diabetes status for a new patient
+- Display the prediction as **Diabetic** or **Not Diabetic**
+
 ### Evaluation
 - Accuracy Score
 
